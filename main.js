@@ -12,8 +12,11 @@ const options = {
 */
 
 const makeChild = (program, parameters=[], options={}) => {
+
     const child = fork(path.resolve(program), parameters, options)
+
     switch (program){
+
         case 'smartContract.js':
             child.on('message', (msg) => {
                 console.log('message from child : ' + msg);
@@ -25,34 +28,27 @@ const makeChild = (program, parameters=[], options={}) => {
                 }
             })
             break;
-        case 'proofOfWork.js':
-            child.on('message', (msg) => {
-                console.log('message from child : ' + msg);
-                switch (msg.cmd){
-                    case 'block':
-                        //console.log('Requested Banlance (id : ${msg.account} )')
-                        console.log('Get Block (id : '+ msg.block + ' )')
-                }
-            })
-            break;
+
         default:
             console.log('No program exists')
             return null
+
     }
     return child
 }
 
 let program = 'smartContract.js'
+
 child[program] = makeChild(program, parameters, options)
 if (!child[program]){
     console.log('err')
 }
 
-program = 'proofOfWork.js'
-child[program] = makeChild(program, parameters, options)
-if (!child[program]){
-    console.log('err')
-}
+//program = 'proofOfWork.js'
+//child[program] = makeChild(program, parameters, options)
+//if (!child[program]){
+//    console.log('err')
+//}
 
 //setInterval(() => {
 //    console.log('[parent] hi')

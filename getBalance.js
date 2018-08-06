@@ -6,12 +6,13 @@ const getBalance = (account) => {
         process.send({cmd : 'balance', account : 'A095FD3'})
 
         callback = (msg => {
-            console.log(msg)
+            //console.log(msg)
             resolve(msg)
             process.removeListener('message', callback)
         })
         process.on('message', callback)
+
     })
 }
 
-module.exports = getBalance
+module.exports = { getBalance: getBalance }

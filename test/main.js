@@ -35,8 +35,6 @@ if (!child[program]){
     console.log('err')
 }
 
-require.main === module ? console.log('I am main') : console.log('I am child')
-
 //program = 'proofOfWork.js'
 //child[program] = makeChild(program, parameters, options)
 //if (!child[program]){
